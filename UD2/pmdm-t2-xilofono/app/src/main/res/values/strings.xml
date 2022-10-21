@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">pmdm-t2-xilofono</string>
+    <string name="button_8">C</string>
+    <string name="button_7">B</string>
+    <string name="button_1">C</string>
+    <string name="button_2">D</string>
+    <string name="button_3">E</string>
+    <string name="button_4">F</string>
+    <string name="button_5">G</string>
+    <string name="button_6">A</string>
+</resources>
