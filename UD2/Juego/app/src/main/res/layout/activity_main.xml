@@ -18,15 +18,21 @@
             android:gravity="center">
         <Button
             android:id="@+id/one"
+            android:contentDescription="@string/one"
+            android:onClick="onclick"
             android:text="@string/one"
             android:textSize="50dp"
             ></Button>
         <Button
             android:id="@+id/two"
+            android:contentDescription="@string/two"
+            android:onClick="onclick"
             android:text="@string/two"
             android:textSize="50dp"></Button>
         <Button
             android:id="@+id/three"
+            android:contentDescription="@string/three"
+            android:onClick="onclick"
             android:text="@string/three"
             android:textSize="50dp"></Button>
 
@@ -38,15 +44,21 @@
             android:gravity="center">
             <Button
                 android:id="@+id/four"
+                android:onClick="onclick"
+                android:contentDescription="@string/four"
                 android:text="@string/four"
                 android:textSize="50dp"
                 ></Button>
             <Button
                 android:id="@+id/five"
+                android:contentDescription="@string/five"
+                android:onClick="onclick"
                 android:text="@string/five"
                 android:textSize="50dp"></Button>
             <Button
                 android:id="@+id/six"
+                android:contentDescription="@string/six"
+                android:onClick="onclick"
                 android:text="@string/six"
                 android:textSize="50dp"></Button>
 
@@ -58,15 +70,21 @@
             android:gravity="center">
             <Button
                 android:id="@+id/seven"
+                android:contentDescription="@string/seven"
+                android:onClick="onclick"
                 android:text="@string/seven"
                 android:textSize="50dp"
                 ></Button>
             <Button
                 android:id="@+id/eight"
+                android:contentDescription="@string/eight"
+                android:onClick="onclick"
                 android:text="@string/eight"
                 android:textSize="50dp"></Button>
             <Button
                 android:id="@+id/nine"
+                android:contentDescription="@string/nine"
+                android:onClick="onclick"
                 android:text="@string/nine"
                 android:textSize="50dp"></Button>
         </TableRow>
