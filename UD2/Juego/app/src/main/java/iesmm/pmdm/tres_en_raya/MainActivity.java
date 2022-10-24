@@ -91,7 +91,8 @@ public class MainActivity extends AppCompatActivity {
         else if(estadoJuego==0){
             if(jugador==JuegoTresEnRaya.JUGADOR)
                 mTurno=JuegoTresEnRaya.MAQUINA;
-            else if(jugador==JuegoTresEnRaya.JUGADOR);
+            else if(jugador==JuegoTresEnRaya.MAQUINA);
+                mTurno=JuegoTresEnRaya.JUGADOR;
 
             controlarTurno();
         }
@@ -115,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-    private void onClick(View boton){
+    public void onClick(View boton){
 
         int id=boton.getId();
         String descripcionBoton=((Button) findViewById(id)).getContentDescription().toString();
