@@ -16,6 +16,10 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mInfoTexto;
 
+    private int maquina=0;
+    private int jugador=0;
+    private int npartidas=0;
+
     private char mTurno= JuegoTresEnRaya.JUGADOR;
 
     private boolean gameOver =false;
@@ -52,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             mBotonesTablero[i].setText("");
             mBotonesTablero[i].setEnabled(true);
         }
+
         controlarTurno();
     }
 
@@ -83,27 +88,37 @@ public class MainActivity extends AppCompatActivity {
         else
             mBotonesTablero[casilla].setTextColor(Color.rgb(200,0,0));
 
-
         int estadoJuego=comprobarEstadoJuego();
 
         if(estadoJuego==1||estadoJuego==2)
             gameOver();
         else if(estadoJuego==0){
-            if(jugador==JuegoTresEnRaya.JUGADOR)
-                mTurno=JuegoTresEnRaya.MAQUINA;
-            else if(jugador==JuegoTresEnRaya.MAQUINA);
-                mTurno=JuegoTresEnRaya.JUGADOR;
+       if(jugador==JuegoTresEnRaya.JUGADOR)
+           mTurno=JuegoTresEnRaya.MAQUINA;
+       else if(jugador==JuegoTresEnRaya.MAQUINA)
+           mTurno=JuegoTresEnRaya.JUGADOR;
 
             controlarTurno();
         }
     }
 
-    private int comprobarEstadoJuego(){
-        int estado=mJuego.comprobarGanador();
-        if(estado==1)
+    private int comprobarEstadoJuego() {
+        int estado = mJuego.comprobarGanador();
+        if (estado == 1) {
+            jugador=jugador+1;
             mInfoTexto.setText(R.string.result_human_wins);
-        else if(estado==2)
+            TextView valor=(TextView) findViewById(R.id.player_score);
+            valor.setText(String.valueOf(jugador));
+
+
+        } else if (estado == 2){
+            maquina=maquina+1;
             mInfoTexto.setText(R.string.result_computer_wins);
+            TextView valor=(TextView) findViewById(R.id.computer_score);
+            valor.setText(String.valueOf(maquina));
+
+
+    };
         return estado;
     }
 
@@ -114,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
         for(int i=0;i<mBotonesTablero.length;i++){
             mBotonesTablero[i].setEnabled(false);
         }
+        comenzarJuego();
 
     }
     public void onClick(View boton){
@@ -126,6 +142,21 @@ public class MainActivity extends AppCompatActivity {
 
             colocarFichaEnTablero(JuegoTresEnRaya.JUGADOR,casilla);
         }
+
+    }
+
+    public void newGame(View boton){
+
+        comenzarJuego();
+        maquina=0;
+        TextView scoreMaquina=(TextView) findViewById(R.id.computer_score);
+        scoreMaquina.setText(String.valueOf(maquina));
+        jugador=0;
+        TextView scoreJugador=(TextView) findViewById(R.id.player_score);
+        scoreJugador.setText(String.valueOf(maquina));
+        npartidas=0;
+        TextView partidas=(TextView) findViewById(R.id.tie_score);
+        scoreJugador.setText(String.valueOf(npartidas));
 
     }
 

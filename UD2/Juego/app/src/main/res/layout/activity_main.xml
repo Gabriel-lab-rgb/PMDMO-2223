@@ -167,6 +167,12 @@
                 ></TextView>
 
         </TableRow>
+        <Button
+            android:id="@+id/reiniciar"
+            android:contentDescription="@string/reiniciar"
+            android:onClick="newGame"
+            android:text="@string/reiniciar"
+            android:textSize="50sp"></Button>
 
 
     </TableLayout>
