@@ -2,11 +2,14 @@ package iesmm.pmdm.tres_en_raya;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -91,7 +94,9 @@ public class MainActivity extends AppCompatActivity {
         int estadoJuego=comprobarEstadoJuego();
 
         if(estadoJuego==1||estadoJuego==2)
-            gameOver();
+                gameOver();
+
+
         else if(estadoJuego==0){
        if(jugador==JuegoTresEnRaya.JUGADOR)
            mTurno=JuegoTresEnRaya.MAQUINA;
@@ -104,31 +109,43 @@ public class MainActivity extends AppCompatActivity {
 
     private int comprobarEstadoJuego() {
         int estado = mJuego.comprobarGanador();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         if (estado == 1) {
             jugador=jugador+1;
             mInfoTexto.setText(R.string.result_human_wins);
             TextView valor=(TextView) findViewById(R.id.player_score);
             valor.setText(String.valueOf(jugador));
+            builder.setTitle("!Felicidades¡");
+            builder.setMessage("Has ganado a la máquina");
+            builder.setPositiveButton("Aceptar", null);
 
-
+            AlertDialog dialog = builder.create();
+            dialog.show();
         } else if (estado == 2){
             maquina=maquina+1;
             mInfoTexto.setText(R.string.result_computer_wins);
             TextView valor=(TextView) findViewById(R.id.computer_score);
             valor.setText(String.valueOf(maquina));
 
+            builder.setTitle("!Lastima¡");
+            builder.setMessage("Has perdido contra la máquina");
+            builder.setPositiveButton("Aceptar", null);
 
+            AlertDialog dialog = builder.create();
+            dialog.show();
     };
+
         return estado;
     }
 
-    private void gameOver(){
+    private void gameOver()  {
 
         gameOver=true;
 
         for(int i=0;i<mBotonesTablero.length;i++){
             mBotonesTablero[i].setEnabled(false);
         }
+
         comenzarJuego();
 
     }
@@ -147,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void newGame(View boton){
 
-        comenzarJuego();
         maquina=0;
         TextView scoreMaquina=(TextView) findViewById(R.id.computer_score);
         scoreMaquina.setText(String.valueOf(maquina));
@@ -158,7 +174,20 @@ public class MainActivity extends AppCompatActivity {
         TextView partidas=(TextView) findViewById(R.id.tie_score);
         scoreJugador.setText(String.valueOf(npartidas));
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("¡Nueva partida!");
+        builder.setMessage("Has iniciado una nueva partida");
+        builder.setPositiveButton("Aceptar", null);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        comenzarJuego();
+
+
     }
+
+
 
 
 

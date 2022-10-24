@@ -149,7 +149,13 @@ public class JuegoTresEnRaya {
         int casilla;
 
         do {
-            casilla = aleatorio.nextInt(9);
+             /*casilla = aleatorio.nextInt(9);*/
+             casilla=0;
+             for(int i=0;i<tablero.length;i++) {
+
+             }
+
+
         } while (tablero[casilla] == JUGADOR || tablero[casilla] == MAQUINA);
 
         return casilla;
