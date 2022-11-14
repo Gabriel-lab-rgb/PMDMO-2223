@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Toolbar</string>
+    <string name="preferencias">Preferencias</string>
+    <string name="acerca_de">Acerca de...</string>
+    <string name="buscar">Buscar</string>
+    <string name="fondo_rojo">fondo rojo</string>
+</resources>
