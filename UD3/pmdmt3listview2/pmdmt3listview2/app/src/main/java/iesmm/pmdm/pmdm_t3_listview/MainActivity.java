@@ -127,7 +127,7 @@ public boolean comprobarDni(String dni){
         File file=this.getExternalFilesDir(null);
         if(file.canWrite()){
             String date = DateTimeFormatter.ofPattern("ddMMyyyy").format(LocalDateTime.now());
-            File f=new File(file,FILENAME + date + ".txt");
+            File f=new File(file,FILENAME +date + ".txt");
             Toast.makeText(getApplicationContext(), f.getAbsolutePath(),Toast.LENGTH_LONG).show();
 
             FileWriter fi= null;
