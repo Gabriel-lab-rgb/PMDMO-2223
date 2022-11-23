@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    private MediaPlayer mJugadorMediaPlayer;
+    private MediaPlayer mBackgroundMusicPlayer;
+    private MediaPlayer mVentanaMediaPlayer;
+
 
     private JuegoTresEnRaya mJuego;
 
@@ -52,10 +58,29 @@ public class MainActivity extends AppCompatActivity {
         comenzarJuego();
     }
 
+    protected void onResume(){
+        super.onResume();
+        mJugadorMediaPlayer=MediaPlayer.create(this,R.raw.splatoon_spinner);
+        mBackgroundMusicPlayer=MediaPlayer.create(this,R.raw.splattack);
+        mVentanaMediaPlayer=MediaPlayer.create(this,R.raw.splatoon_alert);
+
+
+        mBackgroundMusicPlayer.setLooping(true);
+        mBackgroundMusicPlayer.start();
+    }
+
+    protected void onPause(){
+        super.onPause();
+        mJugadorMediaPlayer.release();
+        mBackgroundMusicPlayer.release();
+        mVentanaMediaPlayer.release();
+    }
+
     private void comenzarJuego(){
         mJuego.limpiarTablero();
 
         for(int i=0;i<mBotonesTablero.length;i++){
+            mBotonesTablero[i].setBackgroundResource(R.drawable.interrogacion);
             mBotonesTablero[i].setText("");
             mBotonesTablero[i].setEnabled(true);
         }
@@ -86,10 +111,14 @@ public class MainActivity extends AppCompatActivity {
         mBotonesTablero[casilla].setEnabled(false);
         mBotonesTablero[casilla].setText(String.valueOf(jugador));
 
-        if(jugador==JuegoTresEnRaya.JUGADOR)
-            mBotonesTablero[casilla].setTextColor(Color.rgb(0,200,0));
+        if(jugador==JuegoTresEnRaya.JUGADOR){
+            //mBotonesTablero[casilla].setTextColor(Color.rgb(0,200,0));
+            mBotonesTablero[casilla].setBackgroundResource(R.drawable.icons48);
+           mJugadorMediaPlayer.start();
+        }
         else
-            mBotonesTablero[casilla].setTextColor(Color.rgb(200,0,0));
+            mBotonesTablero[casilla].setBackgroundResource(R.drawable.circle);
+            //mBotonesTablero[casilla].setTextColor(Color.rgb(200,0,0));
 
         int estadoJuego=comprobarEstadoJuego();
 
@@ -112,27 +141,36 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         if (estado == 1) {
             jugador=jugador+1;
+            npartidas=npartidas+1;
             mInfoTexto.setText(R.string.result_human_wins);
             TextView valor=(TextView) findViewById(R.id.player_score);
             valor.setText(String.valueOf(jugador));
-            builder.setTitle("!Felicidades¡");
+            TextView partidas=(TextView) findViewById(R.id.tie_score);
+            partidas.setText(String.valueOf(npartidas));
+
+            builder.setTitle("¡Felicidades!");
             builder.setMessage("Has ganado a la máquina");
             builder.setPositiveButton("Aceptar", null);
 
             AlertDialog dialog = builder.create();
             dialog.show();
+            mVentanaMediaPlayer.start();
         } else if (estado == 2){
             maquina=maquina+1;
+            npartidas=npartidas+1;
             mInfoTexto.setText(R.string.result_computer_wins);
             TextView valor=(TextView) findViewById(R.id.computer_score);
             valor.setText(String.valueOf(maquina));
+            TextView partidas=(TextView) findViewById(R.id.tie_score);
+            partidas.setText(String.valueOf(npartidas));
 
-            builder.setTitle("!Lastima¡");
+            builder.setTitle("¡Lastima!");
             builder.setMessage("Has perdido contra la máquina");
             builder.setPositiveButton("Aceptar", null);
 
             AlertDialog dialog = builder.create();
             dialog.show();
+            mVentanaMediaPlayer.start();
     };
 
         return estado;
@@ -172,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
         scoreJugador.setText(String.valueOf(maquina));
         npartidas=0;
         TextView partidas=(TextView) findViewById(R.id.tie_score);
-        scoreJugador.setText(String.valueOf(npartidas));
+        partidas.setText(String.valueOf(npartidas));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("¡Nueva partida!");
@@ -181,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog dialog = builder.create();
         dialog.show();
+        mVentanaMediaPlayer.start();
 
         comenzarJuego();
 

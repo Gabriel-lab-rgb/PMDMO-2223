@@ -2,17 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="@drawable/r8x6tyc"
     android:padding="10dp"
+
+    android:theme="@style/Theme.AppCompat"
     android:orientation="vertical">
 
     <TableLayout
+
         android:id="@+id/buttons"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:stretchColumns="*">
 
         <TableRow
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center">
@@ -20,20 +25,30 @@
             android:id="@+id/one"
             android:contentDescription="@string/one"
             android:onClick="onClick"
+            android:background="@drawable/interrogacion"
             android:text="@string/one"
+            android:textColor="@android:color/transparent"
             android:textSize="50sp"
             ></Button>
-        <Button
-            android:id="@+id/two"
-            android:contentDescription="@string/two"
-            android:onClick="onClick"
-            android:text="@string/two"
-            android:textSize="50sp"></Button>
-        <Button
+
+            <Button
+                android:id="@+id/two"
+
+
+                android:contentDescription="@string/two"
+                android:onClick="onClick"
+                android:background="@drawable/interrogacion"
+                android:textColor="@android:color/transparent"
+                android:text="@string/two"
+                android:textSize="50sp"></Button>
+
+            <Button
             android:id="@+id/three"
+            android:background="@drawable/interrogacion"
             android:contentDescription="@string/three"
             android:onClick="onClick"
             android:text="@string/three"
+                android:textColor="@android:color/transparent"
             android:textSize="50sp"></Button>
 
         </TableRow>
@@ -44,22 +59,29 @@
             android:gravity="center">
             <Button
                 android:id="@+id/four"
+                android:background="@drawable/interrogacion"
                 android:onClick="onClick"
                 android:contentDescription="@string/four"
                 android:text="@string/four"
+                android:textColor="@android:color/transparent"
                 android:textSize="50sp"
                 ></Button>
             <Button
                 android:id="@+id/five"
+                android:background="@drawable/interrogacion"
                 android:contentDescription="@string/five"
                 android:onClick="onClick"
                 android:text="@string/five"
+                android:textColor="@android:color/transparent"
                 android:textSize="50sp"></Button>
             <Button
                 android:id="@+id/six"
+
+                android:background="@drawable/interrogacion"
                 android:contentDescription="@string/six"
                 android:onClick="onClick"
                 android:text="@string/six"
+                android:textColor="@android:color/transparent"
                 android:textSize="50sp"></Button>
 
         </TableRow>
@@ -70,22 +92,29 @@
             android:gravity="center">
             <Button
                 android:id="@+id/seven"
+                android:background="@drawable/interrogacion"
                 android:contentDescription="@string/seven"
                 android:onClick="onClick"
                 android:text="@string/seven"
+                android:textColor="@android:color/transparent"
                 android:textSize="50sp"
                 ></Button>
             <Button
                 android:id="@+id/eight"
+                android:background="@drawable/interrogacion"
                 android:contentDescription="@string/eight"
                 android:onClick="onClick"
                 android:text="@string/eight"
+
+                android:textColor="@android:color/transparent"
                 android:textSize="50sp"></Button>
             <Button
                 android:id="@+id/nine"
+                android:background="@drawable/interrogacion"
                 android:contentDescription="@string/nine"
                 android:onClick="onClick"
                 android:text="@string/nine"
+                android:textColor="@android:color/transparent"
                 android:textSize="50sp"></Button>
         </TableRow>
     </TableLayout>
@@ -104,6 +133,7 @@
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
             >
+
             <TextView
                 android:id="@+id/information"
                 android:layout_width="match_parent"
@@ -111,68 +141,94 @@
                 android:layout_span="6"
                 android:gravity="center"
                 android:text="@string/result_human_wins"
+                android:textStyle="bold"
+
                 android:textColor="#ffffff"
-                android:textSize="20dp"
-                ></TextView>
+                android:textSize="30dp"></TextView>
         </TableRow>
+
         <TableRow
+            android:background="@drawable/shape"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center">
-
             <TextView
                 android:id="@+id/player_score_label"
                 android:text="@string/puntuacion_jugador"
-                android:textColor="#ffffff"
+                android:textColor="@color/teal_200"
                 android:textSize="20dp"
+                android:textStyle="italic"
                 ></TextView>
+
 
             <TextView
                 android:id="@+id/player_score"
                 android:text="0"
-                android:textColor="#ffffff"
+                android:textColor="@color/teal_200"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                ></TextView>
+                android:textStyle="italic"
 
+                ></TextView>
+        </TableRow>
+        <TableRow
+            android:background="@drawable/shape"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
             <TextView
                 android:id="@+id/tie_score_label"
                 android:text="@string/puntuacion_partidas"
-                android:textColor="#ffffff"
+                android:textColor="@color/purple_700"
                 android:textSize="20dp"
+                android:textStyle="italic"
                 ></TextView>
+
 
             <TextView
                 android:id="@+id/tie_score"
                 android:text="0"
-                android:textColor="#ffffff"
+                android:textColor="@color/purple_700"
                 android:textSize="20dp"
-                android:textStyle="bold"
+                android:textStyle="italic"
+
                 ></TextView>
-
-
+        </TableRow>
+        <TableRow
+            android:background="@drawable/shape"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
             <TextView
                 android:id="@+id/computer_score_label"
                 android:text="@string/puntuacion_maquina"
-                android:textColor="#ffffff"
+                android:textColor="@color/red"
                 android:textSize="20dp"
+                android:textStyle="italic"
                 ></TextView>
 
             <TextView
                 android:id="@+id/computer_score"
                 android:text="0"
-                android:textColor="#ffffff"
+                android:textColor="@color/red"
                 android:textSize="20dp"
-                android:textStyle="bold"
+                android:textStyle="italic"
                 ></TextView>
 
         </TableRow>
+
         <Button
             android:id="@+id/reiniciar"
+            android:layout_marginTop="30sp"
             android:contentDescription="@string/reiniciar"
+
             android:onClick="newGame"
+            android:rotation="-4"
             android:text="@string/reiniciar"
-            android:textSize="50sp"></Button>
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="italic"></Button>
+
 
 
     </TableLayout>

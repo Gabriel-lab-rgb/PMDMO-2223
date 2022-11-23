@@ -1,28 +1,30 @@
 <resources>
-    <string name="app_name">TresEnRaya</string>
-    <string name="action_settings">Settings</string>
-    <string name="puntuacion_jugador">Jugador:</string>
-    <string name="puntuacion_maquina">Maquina:</string>
-    <string name="puntuacion_partidas">Partidas:</string>
 
 
-    <string name="primero_jugador">Tu primero</string>
-    <string name="primero_maquina">Android irá primero</string>
+<string name="app_name">TresEnRaya</string>
+<string name="action_settings">Settings</string>
+<string name="puntuacion_jugador">Player:</string>
+<string name="puntuacion_maquina">Machine:</string>
+<string name="puntuacion_partidas">Games:</string>
 
-    <string name="turno_jugador">Tu turno</string>
-    <string name="turno_maquina">Turno de Android</string>
 
-    <string name="result_tie">Empate</string>
-    <string name="result_human_wins">¡GANASTE!</string>
-    <string name="result_computer_wins">¡Android gana!</string>
+<string name="primero_jugador">You first</string>
+<string name="primero_maquina">Android will go first</string>
 
-    <string name="dificultad_seleccion">Selecciona el nivel de dificultad:</string>
-    <string name="dificultad_facil">Fácil</string>
-    <string name="dificultad_duro">Duro</string>
-    <string name="dificultad_experto">Experto</string>
+<string name="turno_jugador">Your turn</string>
+<string name="turno_maquina">Android turn</string>
 
-    <string name="salir">¿Seguro que deseas salir?</string>
-    <string name="yes">Si</string>
-    <string name="no">No</string>
+<string name="result_tie">Tie</string>
+<string name="result_human_wins">YOU WON!</string>
+<string name="result_computer_wins">Android wins!</string>
+
+<string name="dificultad_seleccion">Select the level of difficulty:</string>
+<string name="dificultad_facil">Easy</string>
+<string name="dificultad_duro">Hard</string>
+<string name="dificultad_experto">Expert</string>
+
+<string name="salir">Are you sure you want to log out?</string>
+<string name="yes">Yes</string>
+<string name="no">No</string>
 
 </resources>

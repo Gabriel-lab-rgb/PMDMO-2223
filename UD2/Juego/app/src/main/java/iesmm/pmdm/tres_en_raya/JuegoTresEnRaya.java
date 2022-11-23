@@ -146,18 +146,61 @@ public class JuegoTresEnRaya {
 
     private int getMovimientoMaquinaAleatorio() {
         // Generación de una casilla aleatoria
-        int casilla;
-
-        do {
-             /*casilla = aleatorio.nextInt(9);*/
-             casilla=0;
-             for(int i=0;i<tablero.length;i++) {
-
-             }
+        int casilla=0;
 
 
-        } while (tablero[casilla] == JUGADOR || tablero[casilla] == MAQUINA);
 
+do{
+    //HORIZONTAL
+  casilla=  aleatorio.nextInt(9);
+    if(tablero[3]==JUGADOR && tablero[4]==JUGADOR){
+        if(tablero[5]!=MAQUINA){
+            casilla=5;
+           }
+        }
+    if (tablero[4]==JUGADOR && tablero[5]==JUGADOR || tablero[4]==JUGADOR && tablero[6]==JUGADOR || tablero[6]==JUGADOR && tablero[4]==JUGADOR){
+        if(tablero[3]!=MAQUINA){
+            casilla=3;
+        }
+    }
+    if(tablero[0]==JUGADOR && tablero[1]==JUGADOR || tablero[5]==JUGADOR && tablero[8]==JUGADOR){
+        if(tablero[2]!=MAQUINA){
+            casilla=2;
+        }
+    }
+    if(tablero[1]==JUGADOR && tablero[2]==JUGADOR || tablero[3]==JUGADOR && tablero[6]==JUGADOR || tablero[4]==JUGADOR && tablero[8]==JUGADOR) {
+        if(tablero[0]!=MAQUINA){
+            casilla = 0;
+        }
+    }
+    if(tablero[6]==JUGADOR && tablero[7]==JUGADOR || tablero[2]==JUGADOR && tablero[5]==JUGADOR || tablero[0]==JUGADOR && tablero[4]==JUGADOR ){
+        if(tablero[8]!=MAQUINA ){
+            casilla=8;
+        }
+    }
+    if(tablero[7]==JUGADOR && tablero[8]==JUGADOR || tablero[0]==JUGADOR && tablero[3]==JUGADOR || tablero[2]==JUGADOR && tablero[4]==JUGADOR){
+        if(tablero[6]!=MAQUINA  ){
+            casilla=6;
+        }
+    }
+    if(tablero[1]==JUGADOR && tablero[4]==JUGADOR){
+        if(tablero[7]!=MAQUINA   ){
+            casilla=7;
+        }
+    }
+    if(tablero[4]==JUGADOR && tablero[7]==JUGADOR) {
+        if(tablero[1]!=MAQUINA ){
+            casilla = 1;
+        }
+    }
+    if(tablero[6]==JUGADOR && tablero[4]==JUGADOR) {
+        if(tablero[2]!=MAQUINA ){
+             casilla=2;
+        }
+    }
+
+
+} while (tablero[casilla] == JUGADOR || tablero[casilla] == MAQUINA);
         return casilla;
     }
 
