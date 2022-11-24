@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="iesmm.pmdm.pmdm_t4_01.MainActivity">
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+
+
+
+    <item android:id="@+id/create_navegador_web" android:title="@string/action_navegador_web"></item>
+    <item android:id="@+id/create_marcador" android:title="@string/action_marcador_llamado"></item>
+    <item android:id="@+id/create_llamado_numero" android:title="@string/action_llamado_numero"></item>
+    <item android:id="@+id/create_llamada" android:title="@string/action_llamada"></item>
+    <item android:id="@+id/create_sms" android:title="@string/action_sms"></item>
+    <item android:id="@+id/create_sms_compartir" android:title="@string/action_sms_compartir"></item>
+</menu>
