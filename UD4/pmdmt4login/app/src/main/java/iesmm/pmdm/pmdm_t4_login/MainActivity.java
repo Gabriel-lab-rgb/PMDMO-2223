@@ -18,13 +18,17 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    ArrayList<Cuenta> cuentas=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        leerUsuarios();
 
         Button b= this.findViewById(R.id.boton_iniciar_sesion);
 
@@ -36,8 +40,9 @@ public class MainActivity extends AppCompatActivity {
                 //comprobarlo introduci do en los campos
                 String correo= ((TextView)findViewById(R.id.input_usuario)).getText().toString();
                 String password=((TextView)findViewById(R.id.input_contrasena)).getText().toString();
-                leerUsuarios(view);
+
                 if(getAccess(correo,password)){
+
                    Bundle bundle=new Bundle();
                    bundle.putString("email",correo);
                    //lanzamiento del Intent
@@ -64,10 +69,22 @@ public class MainActivity extends AppCompatActivity {
      */
     private boolean getAccess(String correo, String password) {
 
-        return true;
+        boolean correcto=false;
+        for(int i=0;i<cuentas.size();i++) {
+
+            if (cuentas.get(i).getUsuario().equals(correo)) {
+                if (cuentas.get(i).getContraseña().equals(password)) {
+                   correcto=true;
+                }else{
+                    correcto=false;
+                }
+            }
+
+        }
+        return correcto;
     }
 
-    private void leerUsuarios(View view){
+    private void leerUsuarios(){
 
         BufferedReader b= null;
         try {
@@ -78,9 +95,9 @@ public class MainActivity extends AppCompatActivity {
             String[] array=new String[2];
             while ((linea=b.readLine())!=null){
                 array=linea.split(":");
-
+               cuentas.add(new Cuenta(array[0],array[1],array[2]));
             }
-            Snackbar.make(view,array[0],Snackbar.LENGTH_LONG).show();
+           /* Snackbar.make(view,array[0],Snackbar.LENGTH_LONG).show();*/
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
