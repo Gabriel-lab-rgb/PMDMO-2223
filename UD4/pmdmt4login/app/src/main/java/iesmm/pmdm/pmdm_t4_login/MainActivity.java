@@ -2,6 +2,7 @@ package iesmm.pmdm.pmdm_t4_login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,9 +13,11 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -68,7 +71,9 @@ public class MainActivity extends AppCompatActivity {
 
         BufferedReader b= null;
         try {
-            b = new BufferedReader(new FileReader(String.valueOf(this.openFileInput("users.csv"))));
+
+            InputStreamReader inputStreamReader = new InputStreamReader( this.openFileInput("users.csv"),"UTF-8");
+            b = new BufferedReader(inputStreamReader);
             String linea="";
             String[] array=new String[2];
             while ((linea=b.readLine())!=null){
