@@ -5,11 +5,13 @@ public class Cuenta {
     String usuario;
     String contraseña;
     String telefono;
+    String email;
 
-    public Cuenta(String usuario, String contraseña, String telefono) {
+    public Cuenta(String usuario, String contraseña,String email, String telefono) {
         this.usuario = usuario;
         this.contraseña = contraseña;
         this.telefono = telefono;
+        this.email=email;
     }
 
     public String getUsuario() {
@@ -34,5 +36,15 @@ public class Cuenta {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+
     }
 }

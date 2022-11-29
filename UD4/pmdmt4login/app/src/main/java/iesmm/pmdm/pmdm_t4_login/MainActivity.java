@@ -44,7 +44,13 @@ public class MainActivity extends AppCompatActivity {
                 if(getAccess(correo,password)){
 
                    Bundle bundle=new Bundle();
-                   bundle.putString("email",correo);
+                   Cuenta cuenta=obtenerCuenta(correo);
+                   if(cuenta!=null){
+                       bundle.putString("usuario",cuenta.getUsuario());
+                       bundle.putString("email",cuenta.getEmail());
+                       bundle.putString("telefono",cuenta.getTelefono());
+                   }
+
                    //lanzamiento del Intent
                     Intent i=new Intent(getApplicationContext(),DetailActivity.class);
                     i.putExtras(bundle);
@@ -72,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         boolean correcto=false;
         for(int i=0;i<cuentas.size();i++) {
 
-            if (cuentas.get(i).getUsuario().equals(correo)) {
+            if (cuentas.get(i).getEmail().equals(correo)) {
                 if (cuentas.get(i).getContraseña().equals(password)) {
                    correcto=true;
                 }else{
@@ -84,6 +90,16 @@ public class MainActivity extends AppCompatActivity {
         return correcto;
     }
 
+    private Cuenta obtenerCuenta(String correo){
+        Cuenta cuenta=null;
+        for (int i=0;i<cuentas.size();i++){
+            if(cuentas.get(i).getUsuario().equals(correo)){
+                cuenta=cuentas.get(i);
+            }
+        }
+        return cuenta;
+    }
+
     private void leerUsuarios(){
 
         BufferedReader b= null;
@@ -92,10 +108,10 @@ public class MainActivity extends AppCompatActivity {
             InputStreamReader inputStreamReader = new InputStreamReader( this.openFileInput("users.csv"),"UTF-8");
             b = new BufferedReader(inputStreamReader);
             String linea="";
-            String[] array=new String[2];
+            String[] array;
             while ((linea=b.readLine())!=null){
                 array=linea.split(":");
-               cuentas.add(new Cuenta(array[0],array[1],array[2]));
+               cuentas.add(new Cuenta(array[0],array[1],array[2],array[3]));
             }
            /* Snackbar.make(view,array[0],Snackbar.LENGTH_LONG).show();*/
 
