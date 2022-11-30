@@ -90,12 +90,18 @@ public class MainActivity extends AppCompatActivity {
                       realizarLlamada(contacto.getTelefono());
                     }
                 })
-
+                .setNeutralButton("Enviar Mensaje", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                         enviarMensaje();
+                    }
+                })
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
                 });
+
         AlertDialog alert = builder.create();
         alert.show();
     }
@@ -105,6 +111,19 @@ public class MainActivity extends AppCompatActivity {
         Uri uri= Uri.parse("tel:"+telefono);
         this.startActivity(new Intent(Intent.ACTION_CALL,uri));
     }
+
+    public void enviarMensaje(){
+
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+            sendIntent.setPackage("com.whatsapp");
+            sendIntent.setType("text/plain");
+            startActivity(sendIntent);
+
+    }
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private boolean confirmarPermisoLlamada() {

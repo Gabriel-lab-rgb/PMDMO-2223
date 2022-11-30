@@ -38,6 +38,6 @@ public class Contacto {
 
     @Override
     public String toString() {
-        return   nombre + ";" + telefono + ";" +  email;
+        return   nombre ;
     }
 }
