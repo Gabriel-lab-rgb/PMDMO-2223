@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,24 +16,23 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
+
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class MainActivity extends AppCompatActivity {
 
     private final String FILENAME  ="contactos.csv";
     private ArrayList<Contacto>contactos=new ArrayList<>();
     private ArrayAdapter<Contacto> adapter;
+    @SuppressLint("NewApi")
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +66,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void addItems(ArrayList contactos){
+        contactos.sort(Comparator.comparing(Contacto::getNombre)
+                .thenComparing(Contacto::getNombre));
         ListView lista=this.findViewById(R.id.listView1);
         adapter =new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,contactos);
         lista.setAdapter(adapter);
