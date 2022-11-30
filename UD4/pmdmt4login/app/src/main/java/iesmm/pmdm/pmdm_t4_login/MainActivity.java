@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     i.putExtras(bundle);
                     startActivity(i);
                 }else{
-                    Snackbar.make(view,"Error de conexión",Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(view,"Correo electronico o contraseña incorrectos",Snackbar.LENGTH_LONG).show();
 
                 }
 
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
     private Cuenta obtenerCuenta(String correo){
         Cuenta cuenta=null;
         for (int i=0;i<cuentas.size();i++){
-            if(cuentas.get(i).getUsuario().equals(correo)){
+            if(cuentas.get(i).getEmail().equals(correo)){
                 cuenta=cuentas.get(i);
             }
         }
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 array=linea.split(":");
                cuentas.add(new Cuenta(array[0],array[1],array[2],array[3]));
             }
-           /* Snackbar.make(view,array[0],Snackbar.LENGTH_LONG).show();*/
+
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -15,8 +15,14 @@ public class DetailActivity extends AppCompatActivity {
         Bundle bundle = this.getIntent().getExtras();
         if (bundle != null) {
             String email=bundle.getString("email");
-            TextView text=this.findViewById(R.id.welcome);
-            text.setText("Bienvenido " +email);
+            String user=bundle.getString("usuario");
+            String tel=bundle.getString("telefono");
+            TextView textUser=this.findViewById(R.id.username);
+            textUser.setText(textUser.getText() + user);
+            TextView textEmail=this.findViewById(R.id.email);
+            textEmail.setText(textEmail.getText() +email);
+            TextView textTel=this.findViewById(R.id.telefono);
+            textTel.setText(textTel.getText() +tel);
 
         }
 
