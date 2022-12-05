@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<Cuenta> cuentas=new ArrayList<>();
+    ArrayList<Cuenta> cuentas = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         leerUsuarios();
 
-        Button b= this.findViewById(R.id.boton_iniciar_sesion);
+        Button b = this.findViewById(R.id.boton_iniciar_sesion);
 
 
         b.setOnClickListener(new View.OnClickListener() {
@@ -38,25 +38,25 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 /*Snackbar.make(view,"Ha pulsado aquí",Snackbar.LENGTH_LONG).show();*/
                 //comprobarlo introduci do en los campos
-                String correo= ((TextView)findViewById(R.id.input_usuario)).getText().toString();
-                String password=((TextView)findViewById(R.id.input_contrasena)).getText().toString();
+                String correo = ((TextView) findViewById(R.id.input_usuario)).getText().toString();
+                String password = ((TextView) findViewById(R.id.input_contrasena)).getText().toString();
 
-                if(getAccess(correo,password)){
+                if (getAccess(correo, password)) {
 
-                   Bundle bundle=new Bundle();
-                   Cuenta cuenta=obtenerCuenta(correo);
-                   if(cuenta!=null){
-                       bundle.putString("usuario",cuenta.getUsuario());
-                       bundle.putString("email",cuenta.getEmail());
-                       bundle.putString("telefono",cuenta.getTelefono());
-                   }
+                    Bundle bundle = new Bundle();
+                    Cuenta cuenta = obtenerCuenta(correo);
+                    if (cuenta != null) {
+                        bundle.putString("usuario", cuenta.getUsuario());
+                        bundle.putString("email", cuenta.getEmail());
+                        bundle.putString("telefono", cuenta.getTelefono());
+                    }
 
-                   //lanzamiento del Intent
-                    Intent i=new Intent(getApplicationContext(),DetailActivity.class);
+                    //lanzamiento del Intent
+                    Intent i = new Intent(getApplicationContext(), DetailActivity.class);
                     i.putExtras(bundle);
                     startActivity(i);
-                }else{
-                    Snackbar.make(view,"Correo electronico o contraseña incorrectos",Snackbar.LENGTH_LONG).show();
+                } else {
+                    Snackbar.make(view, "Correo electronico o contraseña incorrectos", Snackbar.LENGTH_LONG).show();
 
                 }
 
@@ -67,22 +67,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Devuelve true si el email y password son correctos y si estan en el fichero
      *
-     *  Devuelve true si el email y password son correctos y si estan en el fichero
      * @param correo
      * @param password
      * @return
      */
     private boolean getAccess(String correo, String password) {
 
-        boolean correcto=false;
-        for(int i=0;i<cuentas.size();i++) {
+        boolean correcto = false;
+        for (int i = 0; i < cuentas.size(); i++) {
 
             if (cuentas.get(i).getEmail().equals(correo)) {
                 if (cuentas.get(i).getContraseña().equals(password)) {
-                   correcto=true;
-                }else{
-                    correcto=false;
+                    correcto = true;
+                } else {
+                    correcto = false;
                 }
             }
 
@@ -90,28 +90,28 @@ public class MainActivity extends AppCompatActivity {
         return correcto;
     }
 
-    private Cuenta obtenerCuenta(String correo){
-        Cuenta cuenta=null;
-        for (int i=0;i<cuentas.size();i++){
-            if(cuentas.get(i).getEmail().equals(correo)){
-                cuenta=cuentas.get(i);
+    private Cuenta obtenerCuenta(String correo) {
+        Cuenta cuenta = null;
+        for (int i = 0; i < cuentas.size(); i++) {
+            if (cuentas.get(i).getEmail().equals(correo)) {
+                cuenta = cuentas.get(i);
             }
         }
         return cuenta;
     }
 
-    private void leerUsuarios(){
+    private void leerUsuarios() {
 
-        BufferedReader b= null;
+        BufferedReader b = null;
         try {
 
-            InputStreamReader inputStreamReader = new InputStreamReader( this.openFileInput("users.csv"),"UTF-8");
+            InputStreamReader inputStreamReader = new InputStreamReader(this.openFileInput("users.csv"), "UTF-8");
             b = new BufferedReader(inputStreamReader);
-            String linea="";
+            String linea = "";
             String[] array;
-            while ((linea=b.readLine())!=null){
-                array=linea.split(":");
-               cuentas.add(new Cuenta(array[0],array[1],array[2],array[3]));
+            while ((linea = b.readLine()) != null) {
+                array = linea.split(":");
+                cuentas.add(new Cuenta(array[0], array[1], array[2], array[3]));
             }
 
 

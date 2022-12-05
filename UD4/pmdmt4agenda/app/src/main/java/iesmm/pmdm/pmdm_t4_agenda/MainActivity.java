@@ -29,9 +29,10 @@ import java.util.Comparator;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String FILENAME  ="contactos.csv";
-    private ArrayList<Contacto>contactos=new ArrayList<>();
+    private final String FILENAME = "contactos.csv";
+    private ArrayList<Contacto> contactos = new ArrayList<>();
     private ArrayAdapter<Contacto> adapter;
+
     @SuppressLint("NewApi")
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -44,34 +45,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void recuperarDatos() {
-        BufferedReader b= null;
+        BufferedReader b = null;
         try {
 
-            InputStreamReader inputStreamReader = new InputStreamReader( this.openFileInput(FILENAME),"UTF-8");
+            InputStreamReader inputStreamReader = new InputStreamReader(this.openFileInput(FILENAME), "UTF-8");
             b = new BufferedReader(inputStreamReader);
-                String linea="";
-                while((linea=b.readLine())!=null){
-                    if(!linea.isEmpty()){
-                        String[] cadena= linea.split(";");
-                        contactos.add(new Contacto(cadena[0],cadena[1],cadena[2]));
-                    }
+            String linea = "";
+            while ((linea = b.readLine()) != null) {
+                if (!linea.isEmpty()) {
+                    String[] cadena = linea.split(";");
+                    contactos.add(new Contacto(cadena[0], cadena[1], cadena[2]));
                 }
+            }
 
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
 
-    } catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void addItems(ArrayList contactos){
+    private void addItems(ArrayList contactos) {
         contactos.sort(Comparator.comparing(Contacto::getNombre)
                 .thenComparing(Contacto::getNombre));
-        ListView lista=this.findViewById(R.id.listView1);
-        adapter =new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,contactos);
+        ListView lista = this.findViewById(R.id.listView1);
+        adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, contactos);
         lista.setAdapter(adapter);
 
 
@@ -84,19 +85,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void muestraDialogo(Contacto contacto){
+    private void muestraDialogo(Contacto contacto) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("¿Deseas realizar alguna acción?")
                 .setCancelable(false)
                 .setPositiveButton("Llamar al " + contacto.getTelefono(), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                      realizarLlamada(contacto.getTelefono());
+                        realizarLlamada(contacto.getTelefono());
                     }
                 })
                 .setNeutralButton("Enviar Mensaje", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                         enviarMensaje();
+                        enviarMensaje();
                     }
                 })
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -111,32 +112,29 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void realizarLlamada(String telefono) {
-        Uri uri= Uri.parse("tel:"+telefono);
-        this.startActivity(new Intent(Intent.ACTION_CALL,uri));
+        Uri uri = Uri.parse("tel:" + telefono);
+        this.startActivity(new Intent(Intent.ACTION_CALL, uri));
     }
 
-    public void enviarMensaje(){
+    public void enviarMensaje() {
 
-            Intent sendIntent = new Intent();
-            sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
-            sendIntent.setPackage("com.whatsapp");
-            sendIntent.setType("text/plain");
-            startActivity(sendIntent);
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+        sendIntent.setPackage("com.whatsapp");
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
 
     }
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private boolean confirmarPermisoLlamada() {
         boolean confirmado = false;
 
-        if (ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)
-        {
+        if (ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             this.requestPermissions(new String[]{android.Manifest.permission.CALL_PHONE}, 0);
-        }
-        else
+        } else
             confirmado = true;
 
         return confirmado;
