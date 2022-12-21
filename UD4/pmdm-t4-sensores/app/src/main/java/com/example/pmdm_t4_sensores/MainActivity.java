@@ -94,6 +94,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             float proximity = sensorEvent.values[0];
 
             if (proximity >= 0 && proximity <= 0.4) {
+                long  secuencia[]={0,1000};
+                vibrator.vibrate(secuencia,-1);
                 value.setText("Alejate");
                 layout.setBackgroundColor(R.color.red_oscuro);
                 efecto.start();
