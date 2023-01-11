@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/UD4.iml" filepath="$PROJECT_DIR$/.idea/UD4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pmdm-t4-sensores-02.iml" filepath="$PROJECT_DIR$/.idea/modules/pmdm-t4-sensores-02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/pmdm-t4-sensores-02.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/pmdm-t4-sensores-02.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/pmdm-t4-sensores-02.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/pmdm-t4-sensores-02.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/pmdm-t4-sensores-02.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/pmdm-t4-sensores-02.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/pmdm-t4-sensores-02.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/pmdm-t4-sensores-02.app.unitTest.iml" />
     </modules>
   </component>
 </project>
