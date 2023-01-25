@@ -8,6 +8,8 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private final String LOGTAG = "PMDM";
     float[] mGravity = new float[3];
     float[] mGeomagnetic = new float[3];
+    float c=0;
 
 
     @Override
@@ -78,14 +81,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 float azimuthInDegress = (float) (Math.toDegrees(azimut) + 360) % 360;
                 orientacion.setText((int) azimuthInDegress + "º");
 
-                if ((int) azimuthInDegress == 360) {
+                if ((int) azimuthInDegress == 360 || (int) azimuthInDegress == 0) {
                     punto.setText("N");
                 } else if ((int) azimuthInDegress < 360 && (int) azimuthInDegress > 270) {
-                    punto.setText("NOESTE");
+                    punto.setText("NO");
                 } else if ((int) azimuthInDegress == 270) {
-                    punto.setText("OESTE");
+                    punto.setText("O");
                 } else if ((int) azimuthInDegress < 270 && (int) azimuthInDegress > 180) {
-                    punto.setText("SOESTE");
+                    punto.setText("SO");
                 } else if ((int) azimuthInDegress == 180) {
                     punto.setText("S");
                 } else if ((int) azimuthInDegress < 180 && (int) azimuthInDegress > 90) {
@@ -95,11 +98,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 } else if ((int) azimuthInDegress > 0 && (int) azimuthInDegress < 90) {
                     punto.setText("NE");
                 }
-                image.animate().rotation((int) azimuthInDegress).setDuration(100).start();
+                RotateAnimation rotate = new RotateAnimation(c,azimuthInDegress, Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+                rotate.setDuration(250);
+                rotate.setFillAfter(true);
+                image.startAnimation(rotate);
+                c=azimuthInDegress;
+                //image.animate().rotation((int) azimuthInDegress).setDuration(100).start();
             }
         }
     }
-
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
