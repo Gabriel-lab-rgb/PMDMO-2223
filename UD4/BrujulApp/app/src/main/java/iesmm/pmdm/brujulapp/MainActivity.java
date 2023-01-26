@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private final String LOGTAG = "PMDM";
     float[] mGravity = new float[3];
     float[] mGeomagnetic = new float[3];
+    private final  float[] r = new float[9];
+    private final float[] orientation = new float[3];
     float c=0;
 
 
@@ -70,46 +72,50 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             System.arraycopy(event.values, 0, mGeomagnetic, 0, 3);
 
         }
-        if (mGravity != null && mGeomagnetic != null) {
-            float[] R = new float[9];
-            float[] I = new float[9];
-            boolean success = SensorManager.getRotationMatrix(R, I, mGravity, mGeomagnetic);
+
+
+            boolean success = SensorManager.getRotationMatrix(r, null, mGeomagnetic, mGravity);
             if (success) {
-                float[] orientation = new float[3];
-                SensorManager.getOrientation(R, orientation);
-                float azimut = orientation[0]; // orientation contains: azimut, pitch and roll
+
+                SensorManager.getOrientation(r, orientation);
+                float azimut = orientation[0];
                 float azimuthInDegress = (float) (Math.toDegrees(azimut) + 360) % 360;
                 orientacion.setText((int) azimuthInDegress + "º");
+                cambiarOrientacion((int) azimuthInDegress);
 
-                if ((int) azimuthInDegress == 360 || (int) azimuthInDegress == 0) {
-                    punto.setText("N");
-                } else if ((int) azimuthInDegress < 360 && (int) azimuthInDegress > 270) {
-                    punto.setText("NO");
-                } else if ((int) azimuthInDegress == 270) {
-                    punto.setText("O");
-                } else if ((int) azimuthInDegress < 270 && (int) azimuthInDegress > 180) {
-                    punto.setText("SO");
-                } else if ((int) azimuthInDegress == 180) {
-                    punto.setText("S");
-                } else if ((int) azimuthInDegress < 180 && (int) azimuthInDegress > 90) {
-                    punto.setText("SE");
-                } else if ((int) azimuthInDegress == 90) {
-                    punto.setText("E");
-                } else if ((int) azimuthInDegress > 0 && (int) azimuthInDegress < 90) {
-                    punto.setText("NE");
-                }
-                RotateAnimation rotate = new RotateAnimation(c,azimuthInDegress, Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
-                rotate.setDuration(250);
+
+                RotateAnimation rotate = new RotateAnimation(c,(int) azimuthInDegress, Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+                rotate.setDuration(100);
                 rotate.setFillAfter(true);
                 image.startAnimation(rotate);
                 c=azimuthInDegress;
                 //image.animate().rotation((int) azimuthInDegress).setDuration(100).start();
-            }
+
         }
     }
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+
+    private void cambiarOrientacion(int grados){
+        if ( grados == 360 || grados == 0) {
+            punto.setText("N");
+        } else if (grados < 360 && grados > 270) {
+            punto.setText("NO");
+        } else if (grados== 270) {
+            punto.setText("O");
+        } else if (grados < 270 &&  grados > 180) {
+            punto.setText("SO");
+        } else if (grados == 180) {
+            punto.setText("S");
+        } else if (grados < 180 &&  grados > 90) {
+            punto.setText("SE");
+        } else if (grados == 90) {
+            punto.setText("E");
+        } else if (grados > 0 && grados < 90) {
+            punto.setText("NE");
+        }
     }
 
     @Override
