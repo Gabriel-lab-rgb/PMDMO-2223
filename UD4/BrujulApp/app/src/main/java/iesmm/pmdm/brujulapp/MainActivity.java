@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private final String LOGTAG = "PMDM";
     float[] mGravity = new float[3];
     float[] mGeomagnetic = new float[3];
+    final float[] R = new float[9];
+    final float[] orientation = new float[3];
     float c=0;
 
 
@@ -71,17 +73,18 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         }
         if (mGravity != null && mGeomagnetic != null) {
-           final float[] R = new float[9];
+
 
             boolean success = SensorManager.getRotationMatrix(R, null, mGeomagnetic, mGravity);
             if (success) {
-              final float[] orientation = new float[3];
+
                 SensorManager.getOrientation(R, orientation);
                 float azimut = orientation[0];
 
                 float azimuthInDegress = (float) (Math.toDegrees(azimut) + 360) % 360;
                 orientacion.setText((int) azimuthInDegress + "º");
                 actualizarText((int)azimuthInDegress);
+
 
                 RotateAnimation rotate = new RotateAnimation(c,(int)azimuthInDegress, Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
                 rotate.setDuration(250);

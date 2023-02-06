@@ -3,6 +3,8 @@ package iesmm.pmdm.googlemaps;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -15,12 +17,17 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
+import java.util.List;
+
 import iesmm.pmdm.googlemaps.databinding.ActivityMapsBinding;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
+  /*  private  Geocoder code;
+    private List<Address> d;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +40,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
 
 
     }
@@ -58,8 +66,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(sevilla).title("sevilla"));
         mMap.addMarker(new MarkerOptions().position(cadiz).title("cadiz"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sevilla));
-        mMap.setOnMarkerClickListener(this);
         mMap.setOnMapClickListener(this);
+        mMap.setOnMarkerClickListener(this);
+        //mMap.setOnMapClickListener(this);
 
     }
 
@@ -69,7 +78,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public boolean onMarkerClick(final Marker marker) {
 
         // Retrieve the data from the marker.
-        Integer clickCount = (Integer) marker.getTag();
+       /* Integer clickCount = (Integer) marker.getTag();
 
         // Check if a click count was set, then display the click count.
         if (clickCount != null) {
@@ -79,7 +88,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     marker.getTitle() +
                             " has been clicked " + clickCount + " times.",
                     Toast.LENGTH_SHORT).show();
-        }
+        }*/
 
         // Return false to indicate that we have not consumed the event and that we wish
         // for the default behavior to occur (which is for the camera to move such that the
@@ -90,5 +99,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapClick(@NonNull LatLng latLng) {
         mMap.addMarker(new MarkerOptions().position(latLng));
+
+
+
+/*
+        Geocoder geocoder = new Geocoder(this);
+        // 1. Obtenemos el objeto Address según la psoición marcada
+        try {
+            List<Address> direcciones = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+
+            // 2. Reolución del objeto Address: calle, ciudad, código postal...
+            Address direccion = direcciones.get(0);
+            String pais = direccion.getCountryCode();
+            String ciudad = direccion.getLocality();
+            String calle = direccion.getAddressLine(0);
+
+            Toast.makeText(this,"PAIS:" + pais + "CIUDAD: " + ciudad + "CALLE: " + calle,Toast.LENGTH_LONG);
+        } catch (IOException e) {
+            Toast.makeText(this, "Posición incorrecta calculada", Toast.LENGTH_SHORT).show();
+        }*/
     }
 }

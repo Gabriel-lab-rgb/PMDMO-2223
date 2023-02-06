@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="iesmm.pmdm.googlemaps">
+    package="iesmm.pmdm.mapsprueba">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
         tools:ignore="CoarseFineLocation" />
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -15,8 +15,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.GoogleMaps"
-        tools:targetApi="31">
+        android:theme="@style/Theme.MapsPrueba"
+        tools:targetApi="33">
 
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -29,11 +29,9 @@
              project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
              "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
         -->
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC8lUmKP3jkfenalk5bZoDnqXHe50zT5Yo" />
-
 
         <activity
             android:name=".MapsActivity"
