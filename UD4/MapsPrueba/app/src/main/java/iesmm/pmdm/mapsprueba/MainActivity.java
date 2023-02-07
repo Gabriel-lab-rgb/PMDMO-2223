@@ -1,64 +1,49 @@
 package iesmm.pmdm.mapsprueba;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Toast;
 
-import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.material.navigation.NavigationView;
 
-import iesmm.pmdm.mapsprueba.databinding.ActivityMapsBinding;
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-public class MainActivity extends AppCompatActivity {
-
-    private LocationManager locationManager;
-    private double latitud;
-    private double longitud;
-
-
+    private DrawerLayout drawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbar); //Ignore red line errors
+        setSupportActionBar(toolbar);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav,
+                R.string.close_nav);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
-       // Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+    }
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
-    private void getLocation(){
-        int permiso=ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
-        if(permiso==PackageManager.PERMISSION_DENIED){
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)){
-            }else{
-                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
-            }
-        }
-    }
 
-
-
-    private final LocationListener locationListener = new LocationListener() {
-
-        @Override
-        public void onLocationChanged(@NonNull Location location) {
-            longitud=location.getLatitude();
-            latitud=location.getLongitude();
-        }
-
-        @Override
-        public void onProviderEnabled(@NonNull String provider) {
-            LocationListener.super.onProviderEnabled(provider);
-        }
-
-        @Override
-        public void onProviderDisabled(@NonNull String provider) {
-            LocationListener.super.onProviderDisabled(provider);
-        }
-    };
 }
