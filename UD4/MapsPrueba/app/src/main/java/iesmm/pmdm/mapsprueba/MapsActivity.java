@@ -25,7 +25,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import iesmm.pmdm.mapsprueba.databinding.ActivityMapsBinding;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,GoogleMap.OnMapClickListener{
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
@@ -38,7 +38,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+      /*  locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -49,7 +49,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // for ActivityCompat#requestPermissions for more details.
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
             return;
-        }
+        }*/
 
 
         //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
@@ -106,20 +106,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
+        LatLng sevilla=new LatLng(37.3754338,-5.9900776);
         LatLng miUbicacion = new LatLng(latitud, longitud);
-        mMap.addMarker(new MarkerOptions().position(miUbicacion));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(miUbicacion));
+        mMap.addMarker(new MarkerOptions().position(sevilla));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sevilla));
+        mMap.setOnMapClickListener(this);
     }
+
 
     @Override
     public void onMapClick(@NonNull LatLng latLng) {
         mMap.addMarker(new MarkerOptions().position(latLng));
-    }
-
-    @Override
-    public boolean onMarkerClick(@NonNull Marker marker) {
-
-
-        return false;
+        Toast.makeText(this,"h",Toast.LENGTH_SHORT).show();
     }
 }

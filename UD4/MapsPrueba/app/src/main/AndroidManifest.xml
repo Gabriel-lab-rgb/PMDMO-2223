@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="iesmm.pmdm.mapsprueba">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION"
         tools:ignore="CoarseFineLocation" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION_LOCATION" />
 
@@ -31,7 +32,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyC8lUmKP3jkfenalk5bZoDnqXHe50zT5Yo" />
+            android:value="YOUR_API_KEY" />
 
         <activity
             android:name=".MapsActivity"
