@@ -21,6 +21,24 @@
             android:textStyle="bold"
             android:text="Añadir Marcador" />
 
+        <TextView
+            android:id="@+id/textPais"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pais" />
+
+        <TextView
+            android:id="@+id/textCiudad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ciudad" />
+
+        <TextView
+            android:id="@+id/textCalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Calle" />
+
         <EditText
             android:id="@+id/editTextEstado"
             android:layout_width="match_parent"
@@ -39,6 +57,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="15dp"
             android:orientation="horizontal">
 
             <Button
@@ -46,14 +65,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="Anadir" />
 
             <Button
                 android:id="@+id/button3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="cancelar" />
         </LinearLayout>
 
     </LinearLayout>
