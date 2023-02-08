@@ -3,11 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/grivote615_iesmartin/Desktop/Proyectos/PMDMO-2223/UD4/MapsPrueba/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
         <entry key="..\:/Users/grivote615_iesmartin/Desktop/Proyectos/PMDMO-2223/UD4/MapsPrueba/app/src/main/res/layout/activity_maps.xml" value="0.1" />
+        <entry key="..\:/Users/grivote615_iesmartin/Desktop/Proyectos/PMDMO-2223/UD4/MapsPrueba/app/src/main/res/layout/fragment_maps.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/grivote615_iesmartin/Desktop/Proyectos/PMDMO-2223/UD4/MapsPrueba/app/src/main/res/layout/layout_bootom_sheet.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/grivote615_iesmartin/Desktop/Proyectos/PMDMO-2223/UD4/MapsPrueba/app/src/main/res/layout/nav_header.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/grivote615_iesmartin/Desktop/Proyectos/PMDMO-2223/UD4/MapsPrueba/app/src/main/res/menu/nav_menu.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
