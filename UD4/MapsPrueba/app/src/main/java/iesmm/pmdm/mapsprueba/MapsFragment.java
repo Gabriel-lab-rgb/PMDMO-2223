@@ -23,6 +23,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -35,6 +36,7 @@ public class MapsFragment extends Fragment implements GoogleMap.OnMapClickListen
     private TextView pais;
     private TextView ciudad;
     private TextView calle;
+    private ArrayList<MarkerOptions> marcadores;
 
     @SuppressLint("MissingInflatedId")
     @Nullable
@@ -44,7 +46,7 @@ public class MapsFragment extends Fragment implements GoogleMap.OnMapClickListen
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_maps, container, false);
         geocoder = new Geocoder(view.getContext());
-
+        marcadores = new ArrayList<>();
         bottomSheetDialog = new BottomSheetDialog(view.getContext(), R.style.BottomSheetDialogTheme);
         bottomSheetView = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.layout_bootom_sheet, view.findViewById(R.id.bottomSheetContainer));
         pais = bottomSheetView.findViewById(R.id.textPais);
@@ -77,8 +79,7 @@ public class MapsFragment extends Fragment implements GoogleMap.OnMapClickListen
     public void onMapClick(@NonNull LatLng latLng) {
         MarkerOptions marker = new MarkerOptions().position(latLng);
         mMap.addMarker(marker);
-
-
+        marcadores.add(marker);
         try {
             List<Address> direcciones = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
             Address direccion = direcciones.get(0);
@@ -90,7 +91,12 @@ public class MapsFragment extends Fragment implements GoogleMap.OnMapClickListen
             bottomSheetView.findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    marcadores.remove(marker);
                     bottomSheetDialog.dismiss();
+                    mMap.clear();
+                    for (MarkerOptions m : marcadores) {
+                        mMap.addMarker(m);
+                    }
                 }
             });
             bottomSheetDialog.show();
