@@ -13,6 +13,9 @@ import android.location.LocationManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.text.Layout;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -22,10 +25,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import iesmm.pmdm.mapsprueba.databinding.ActivityMapsBinding;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,GoogleMap.OnMapClickListener{
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
@@ -106,7 +110,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sevilla=new LatLng(37.3754338,-5.9900776);
+        LatLng sevilla = new LatLng(37.3754338, -5.9900776);
         LatLng miUbicacion = new LatLng(latitud, longitud);
         mMap.addMarker(new MarkerOptions().position(sevilla));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sevilla));
@@ -117,6 +121,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapClick(@NonNull LatLng latLng) {
         mMap.addMarker(new MarkerOptions().position(latLng));
-        Toast.makeText(this,"h",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "h", Toast.LENGTH_SHORT).show();
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this, R.style.BottomSheetDialogTheme);
+        View bottomSheetView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_bootom_sheet, findViewById(R.id.bottomSheetContainer));
+        bottomSheetView.findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheetDialog.dismiss();
+            }
+        });
+        bottomSheetDialog.setContentView(bottomSheetView);
+        bottomSheetDialog.show();
     }
+
+
 }
